@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <script defer src="scripts/teachingProgram.js"></script>
+    <script defer src="scripts/app.js"></script>
+    <script defer src="navbar/navbar.js"></script>
+    <script defer src="metryczka/metryczka.js"></script>
+    <script defer src="dziennik/dziennik.js"></script>
+    <script defer src="podsumowanie/podsumowanie.js"></script>
+    <title>Dzienniczek praktyk</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <h2 class="navbar__title">Dziennik praktyki zawodowej</h2>
+      <ul class="menu">
+        <li class="menu__element menu__element--metryczka">METRYCZKA</li>
+        <li class="menu__element menu__element--dziennik">DZIENNIK</li>
+        <li class="menu__element menu__element--podsumowanie">PODSUMOWANIE</li>
+      </ul>
+    </nav>
+    <main>
+      <section class="metryczka hidden">
+        <form class="form hidden">
+          <h3 class="tytul">Wprowadź dane</h3>
+          <label class="form__label form__label--small">
+            <span class="input__text">Imię:</span>
+            <input
+              class="input input--text"
+              type="text"
+              pattern="[A-ZŻŁ]{1}[a-ząćęłńóśźż]+"
+              title="Imię (np. Jan)"
+              required
+            />
+          </label>
+          <label class="form__label form__label--small">
+            <span class="input__text">Nazwisko:</span>
+            <input
+              class="input input--text"
+              type="text"
+              pattern="[A-ZŻŁŹŚ]{1}[a-ząćęłńóśźż]+"
+              title="Nazwisko (np. Kowalski)"
+              required
+            />
+          </label>
+          <label class="form__label form__label--small">
+            <span class="input__text">Klasa:</span>
+            <input
+              class="input input--text"
+              type="text"
+              pattern="\d{1}[a-zA-Z]{1}"
+              title="Klasa (np. 3a)"
+              required
+            />
+          </label>
+          <label class="form__label form__label--small">
+            <span class="input__text">Rok szkolny:</span>
+            <input
+              class="input input--text"
+              type="text"
+              pattern="\d{2,4}\/\d{2,4}"
+              title="Rok szkolny (np. 22/23)"
+              required
+            />
+          </label>
+          <label class="form__label form__label--small">
+            <span class="input__text">Odbytej w:</span>
+            <input 
+              class="input input--text"
+              type="text"
+              required 
+              title="Nazwa firmy"
+            />
+          </label>
+          <label class="form__label form__label--small">
+            <span class="input__text">Czas trwania praktyki: </span>
+            <span class="input__container">
+              <input 
+                class="input input--date input--date-range"
+                type="date"
+                required 
+                title="Początek"
+              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="1.2em">
+                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="#02b429">
+              </svg>
+              <input 
+                class="input input--date input--date-range"
+                type="date"
+                required 
+                title="Koniec"
+              />
+            </span>
+          </label>
+          <input type="submit" class="input input--submit" value="Zatwierdź" />
+        </form>
+        <div class="metryczka__dane hidden">
+          <h3 class="tytul">Dane ucznia:</h3>
+          <div>
+            Imię i nazwisko: <span class="dane dane--imieINazwisko"></span>
+          </div>
+          <div>
+            Najbardziej prawdopodobny wiek: <span class="dane dane--wiek"></span>
+          </div>
+          <div>
+            Klasa: <span class="dane dane--klasa"></span>,
+            rok szkolny: <span class="dane dane--rokSzkolny"></span>
+          </div>
+          <div>
+            Odbytej w: <span class="dane dane--firma"></span>
+          </div>
+          <div>
+            W terminie od: <span class="dane dane--poczatek"></span>
+            do: <span class="dane dane--koniec"></span>
+          </div>
+          <div class="button__container">
+            <button class="input input--submit dane__button">Edytuj</button>
+          </div>
+        </div>
+      </section>
+      <section class="dziennik hidden">
+        <div class="nowe">
+          <h3 class="tytul">Wprowadź nowe zajęcia</h3>
+          <form class="form">
+            <fieldset class="sekcja">
+              <legend class="sekcja__tytul">Informacja o zajęciach</legend>
+              <label class="form__label form__label--large">
+                <span class="input__text">Data zajęć:</span>
+                <input
+                  class="input input--date"
+                  type="date"
+                  title="Data zajęć"
+                  required
+                />
+              </label>
+              <label class="form__label form__label--large">
+                <span class="input__text">Wybierz dział:</span>
+                <select 
+                  class="input input--select" 
+                  id="dzial-select" 
+                  title="Wybierz dział"
+                  required
+                >
+                  <option selected disabled></option>
+                </select>
+              </label>
+              <label class="form__label form__label--large">
+                <span class="input__text">Wybierz temat:</span>
+                <select 
+                  class="input input--select" 
+                  id="temat-select" 
+                  title="Wybierz temat z wybranego działu"
+                  required
+                >
+                </select>
+              </label>
+            </fieldset>
+            <fieldset class="sekcja">
+              <legend class="sekcja__tytul">Opiekun</legend>
+              <span class="radio__container">
+                <input class="input input--radio" type="radio" name="opiekun" required value="Jerzy Kowal" id="Jerzy Kowal">
+                <label for="Jerzy Kowal">
+                  Jerzy Kowal
+                </label>
+              </span>
+              <span class="radio__container">
+                <input class="input input--radio" type="radio" name="opiekun" value="Robert Lewandowski" id="Robert Lewandowski">
+                <label for="Robert Lewandowski">
+                  Robert Lewandowski
+                </label>
+              </span>
+              <span class="radio__container">
+                <input class="input input--radio" type="radio" name="opiekun" value="Maria Nowak" id="Maria Nowaczek">
+                <label for="Maria Nowaczek">
+                  Maria Nowaczek
+                </label>
+              </span>
+            </fieldset>
+            <fieldset class="sekcja">
+              <legend class="sekcja__tytul">Realizacja materiału</legend>
+              <label class="form__label form__label--large">
+                <span class="input__text">Ilość godzin:</span>
+                <input
+                  class="input input--text"
+                  type="number"
+                  step="0.5"
+                  min="0"
+                  max="12"
+                  title="Ilość godzin spędzonych w pracy"
+                  required
+                />
+              </label>
+              <label class="form__label form__label--large">
+                <span class="input__text">Sprawozdanie:</span>
+                <textarea
+                  class="input input--textarea"
+                  title="Sprawozdanie z dnia pracy"
+                  rows="4"
+                  required
+                ></textarea>
+              </label>
+              <label class="form__label form__label--large">
+                <span class="input__text">Stopień opanowania tematus:</span>
+                <span class="range__container">
+                  1
+                  <input
+                    class="input input--range"
+                    type="range"
+                    step="1"
+                    min="1"
+                    max="6"
+                    title="Ocena"
+                    required
+                  >
+                  6
+                </span>
+              </label>
+              <label class="form__label form__label--large">
+                <span class="input__text">Realizacja:</span>
+                <span class="checkbox__container">
+                  <input
+                    class="input input--checkbox"
+                    type="checkbox"
+                    title="Czy uczeń zrealizował dany temat?"
+                  />
+                  Zrealizowano
+                </span>
+              </label>
+            </fieldset>
+            <input type="submit" value="Dodaj" class="input input--submit button">
+          </form>
+        </div>
+        <hr class="dziennik__breakline">
+        <div class="tematy">
+          <div class="zrealizowane">
+            <h3 class="tytul tytul--tematy">Zrealizowane tematy</h3>
+            <fieldset class="sekcja sekcja--tematy">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy wyroznienie--czerwone">Brak zrealizowanych tematów</legend>
+            </fieldset>
+            <fieldset class="sekcja sekcja--tematy hidden">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Moduł wstępny</legend>
+            </fieldset>
+            <fieldset class="sekcja sekcja--tematy hidden">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Montaż, naprawa, konserwacja i obsługa sprzętu komputerowego</legend>
+            </fieldset>
+            <fieldset class="sekcja sekcja--tematy hidden">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Systemy informatyczne</legend>
+            </fieldset>
+            <fieldset class="sekcja sekcja--tematy hidden">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Tworzenie aplikacji internetowych</legend>
+            </fieldset>
+          </div>
+          <div class="do-zrealizowania">
+            <h3 class="tytul tytul--tematy">Pozostało do zrealizowania</h3>
+            <fieldset class="sekcja">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Moduł wstępny</legend>
+            </fieldset>
+            <fieldset class="sekcja">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Montaż, naprawa, konserwacja i obsługa sprzętu komputerowego</legend>
+            </fieldset>
+            <fieldset class="sekcja">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Systemy informatyczne</legend>
+            </fieldset>
+            <fieldset class="sekcja">
+              <legend align="center" class="sekcja__tytul sekcja__tytul--tematy">Tworzenie aplikacji internetowych</legend>
+            </fieldset>
+          </div>
+        </div>
+      </section>
+      <section class="podsumowanie hidden">
+        <form>
+          <label class="form__label">
+            <span class="input__text">Opinia o praktykancie:</span>
+            <textarea
+              class="input textarea"
+              title="Kliknij, aby edytować opinię o praktykancie"
+              rows="6"
+              required
+            ></textarea>
+          </label>
+        </form>
+        <table class="table">
+          <tr class="table__row">
+            <th class="table__cell table__cell--head table__cell--top-left">Nazwa modułu</th>
+            <th class="table__cell table__cell--head table__cell--top-right">Ilość godzin zrealizowanych</th>
+          </tr>
+          <tr class="table__row">
+            <td class="table__cell">Moduł wstępny</td>
+            <td class="table__cell">0 godz.</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__cell">Montaż, naprawa, konserwacja i obsługa sprzętu komputerowego</td>
+            <td class="table__cell">0 godz.</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__cell">Systemy informatyczne</td>
+            <td class="table__cell">0 godz.</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__cell">Tworzenie aplikacji internetowych</td>
+            <td class="table__cell">0 godz.</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__cell table__cell--right wyroznienie--zielone">Razem:</td>
+            <td class="table__cell wyroznienie--zielone">0 godz.</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__cell table__cell--right wyroznienie--czerwone table__cell--bottom-left">Pozostało do zrealizowania:</td>
+            <td class="table__cell wyroznienie--czerwone table__cell--bottom-right">140 godz.</td>
+          </tr>
+        </table>
+        <div class="ocena" title="Ocena proponowana na bazie średniej ocen z zrealizowanych tematów">
+          <span class="ocena__proponowana">Proponowana ocena: <span class="wyroznienie--pogrubienie"></span></span>
+          <form title="Kliknij, aby wybrać i zapisać ocenę praktykanta">
+            <label>
+              <span class="input__text">Ocena:</span>
+              <select
+                class="input input--select"
+                rows="6"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </label>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+  </html>
+  

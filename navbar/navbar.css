@@ -1,0 +1,29 @@
+.navbar {
+    background-color: #00c52c;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+}
+.navbar__title {
+    font-weight: normal;
+    font-family: 'Fauna One', serif;
+}
+.menu {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+}
+.menu__element {
+    font-weight: 700;
+    padding: 10px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.menu__element:hover {
+    background-color: #02b429;
+}

@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Fauna+One&family=Roboto:wght@400;500;700;900&display=swap');
+@import "form.css";
+@import "../navbar/navbar.css";
+@import "../metryczka/metryczka.css";
+@import "../dziennik/dziennik.css";
+@import "../podsumowanie/podsumowanie.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, Segoe UI, sans-serif;
+}
+body {
+    background-color: #f9fff8;
+    color: #4b5169;
+}
+.hidden {
+    display: none !important;
+}
+.metryczka, .dziennik, .podsumowanie {
+    display: flex;
+    padding: 50px 20px 0;
+    height: calc(92vh - 50px);
+}
+.metryczka, .dziennik {
+    justify-content: space-evenly;
+}
+.podsumowanie {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px
+}
+.tytul {
+    font-size: 1.5em;
+    margin: 0 auto 15px;
+    text-align: center;
+}
+.wyroznienie--zielone {
+    color: #02b429;
+}
+.wyroznienie--czerwone {
+    color: #d80101;
+}
+.wyroznienie--podkreslenie {
+    text-decoration: underline #02b429 2px;
+}
+.wyroznienie--przekreslenie {
+    text-decoration: line-through #4b5169 1px;
+}
+.wyroznienie--odstep {
+    margin-bottom: 5px;
+}
+.wyroznienie--pogrubienie {
+    font-weight: 600;
+}
+.nowy {
+    transform: scale(0);
+    transform-origin: center 50px;
+    animation-name: nowy;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+}
+@keyframes nowy {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+.usuwanie {
+    transform: scale(1);
+    transform-origin: center 50px;
+    animation-name: usuwanie;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+}
+@keyframes usuwanie {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+}

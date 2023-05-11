@@ -1,0 +1,17 @@
+.metryczka__dane {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.dane {
+    color: #02b429;
+}
+.button__container {
+    width: 100%;
+    max-width: 345px;
+    margin: 0 auto;
+}
+.dane__button {
+    width: 100%;
+}
