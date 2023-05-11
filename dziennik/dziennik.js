@@ -77,7 +77,7 @@
   function newId() {
     let maxId = 0;
     for (let i = 0; i < localStorage.length; i++)
-      if (localStorage.key(i) != 'dane' && localStorage.key(i) != 'opinia')
+      if (!isNaN(localStorage.key(i)))
         if (parseInt(localStorage.key(i)) > maxId)
           maxId = parseInt(localStorage.key(i))
     
@@ -226,7 +226,7 @@
 
   // wyświetlenie zapisanych zajęć
   for (i = 0; i < localStorage.length; i++)
-    if (localStorage.key(i) != 'dane' && localStorage.key(i) != 'opinia')
+    if (!isNaN(localStorage.key(i)))
       showTemat(JSON.parse(localStorage.getItem(localStorage.key(i))));
 
   //zapisanie nowych zajęć

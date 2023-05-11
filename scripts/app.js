@@ -19,7 +19,7 @@ teachingProgram.forEach((dzial) => {
 
 // uzupełnienie mapy dzialy zapisanymi danymi
 for (let i = 0; i < localStorage.length; i++)
-  if (localStorage.key(i) != "dane" && localStorage.key(i) != "opinia") {
+  if (!isNaN(localStorage.key(i))) {
     let tmp = JSON.parse(localStorage.getItem(localStorage.key(i)));
     lacznaIloscGodzin += parseFloat(tmp.iloscGodzin);
     dzialy.set(
@@ -103,8 +103,7 @@ function metryczkaShow() {
 function czyZrealizowano(temat) {
   for (let i = 0; i < localStorage.length; i++)
     if (
-      localStorage.key(i) != "dane" &&
-      localStorage.key(i) != "opinia" &&
+      !isNaN(localStorage.key(i)) &&
       JSON.parse(localStorage.getItem(localStorage.key(i))).temat == temat &&
       JSON.parse(localStorage.getItem(localStorage.key(i))).realizacja == true
     )
@@ -139,7 +138,7 @@ function iloscTematow() {
   let iloscTematow = 0;
 
   for (let i = 0; i < localStorage.length; i++)
-    if (localStorage.key(i) != "dane" && localStorage.key(i) != "opinia")
+    if (!isNaN(localStorage.key(i)))
       iloscTematow++;
 
   return iloscTematow;
@@ -150,7 +149,7 @@ function ocenaShow() {
     .childNodes[1];
 
   if (iloscTematow() == 0) {
-    proponowanaOcena.innerText = "Brak ocen";
+    proponowanaOcena.innerText = "brak ocen";
     return;
   }
 
@@ -159,7 +158,7 @@ function ocenaShow() {
   let ocenaSlownie;
 
   for (let i = 0; i < localStorage.length; i++)
-    if (localStorage.key(i) != "dane" && localStorage.key(i) != "opinia")
+    if (!isNaN(localStorage.key(i)))
       sumaOcen += parseInt(
         JSON.parse(localStorage.getItem(localStorage.key(i))).ocena
       );
@@ -208,23 +207,4 @@ function ocenaShow() {
       option.setAttribute("selected", "selected");
       break;
     }
-  if (
-    localStorage.getItem("opinia") != null &&
-    JSON.parse(localStorage.getItem("opinia")).opinia != null
-  )
-    localStorage.setItem(
-      "opinia",
-      JSON.stringify({
-        ...JSON.parse(localStorage.getItem("opinia")),
-        ocena: ocena.value,
-      })
-    );
-  else
-    localStorage.setItem(
-      "opinia",
-      JSON.stringify({
-        opinia: null,
-        ocena: ocena.value,
-      })
-    );
 }
