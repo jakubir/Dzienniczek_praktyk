@@ -1,3 +1,3 @@
 # Dzienniczek praktyk
 
-Aplikacja pod adresem: https://dzienniczek.jakubirla.pl/
+Aplikacja dostępna pod adresem: https://dzienniczek.jakubirla.pl/
