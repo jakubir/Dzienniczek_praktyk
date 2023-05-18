@@ -161,7 +161,7 @@
               element.remove();
               if (parent.childNodes.length == 3)
                 parent.classList.add('hidden');
-              if (iloscTematow == 0)
+              if (iloscTematow() == 0)
                 sekcje[0].classList.remove('hidden');
             }, 1000);
             localStorage.removeItem(tmp.id.substring(1));
