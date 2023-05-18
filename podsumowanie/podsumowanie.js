@@ -6,10 +6,10 @@
 
   if (
     localStorage.getItem("opinia") != null &&
-    localStorage.getItem("opinia").opinia != "" &&
-    localStorage.getItem("opinia").opinia != null
+    JSON.parse(localStorage.getItem("opinia")).opinia != "" &&
+    JSON.parse(localStorage.getItem("opinia")).opinia != null
   ) {
-    opinia.value = localStorage.getItem("opinia").opinia;
+    opinia.value = JSON.parse(localStorage.getItem("opinia")).opinia;
     opinia.classList.add("textarea--used");
   }
 
