@@ -1,0 +1,1 @@
+#Dzienniczek praktyk
