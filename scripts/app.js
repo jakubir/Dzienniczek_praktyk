@@ -9,8 +9,8 @@ const godziny = document.querySelectorAll(
 const ocena = document.querySelector(".ocena .input");
 
 // przygotowanie mapy dzialy
-teachingProgram.forEach((dzial) => {
-  dzial.topic.forEach((temat) => {
+teachingProgram.map((dzial) => {
+  dzial.topic.map((temat) => {
     if (dzialy.has(dzial.name))
       dzialy.set(dzial.name, new Map([...dzialy.get(dzial.name), [temat, 0]]));
     else dzialy.set(dzial.name, new Map([[temat, 0]]));
@@ -138,8 +138,7 @@ function iloscTematow() {
   let iloscTematow = 0;
 
   for (let i = 0; i < localStorage.length; i++)
-    if (!isNaN(localStorage.key(i)))
-      iloscTematow++;
+    if (!isNaN(localStorage.key(i))) iloscTematow++;
 
   return iloscTematow;
 }
@@ -153,15 +152,20 @@ function ocenaShow() {
     return;
   }
 
-  let sumaOcen = 0;
   let wyliczonaOcena;
   let ocenaSlownie;
+  let tmpArray = new Array();
 
   for (let i = 0; i < localStorage.length; i++)
     if (!isNaN(localStorage.key(i)))
-      sumaOcen += parseInt(
-        JSON.parse(localStorage.getItem(localStorage.key(i))).ocena
+      tmpArray.push(
+        parseInt(JSON.parse(localStorage.getItem(localStorage.key(i))).ocena)
       );
+
+  const sumaOcen = tmpArray.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  );
 
   wyliczonaOcena = Math.round(sumaOcen / iloscTematow());
 

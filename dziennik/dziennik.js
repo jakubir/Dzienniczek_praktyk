@@ -187,7 +187,7 @@
   }
 
   // przygotowanie pola Wybierz dział
-  teachingProgram.forEach((dzial) => {
+  teachingProgram.map((dzial) => {
     let option = document.createElement('option');
     option.value = dzial.name;
     option.innerText = dzial.name;
@@ -214,13 +214,20 @@
       }
   
       tematSelect.innerHTML = '<option selected disabled></option>';
-      dzial.topic.forEach((temat) => {
+      console.log(dzial.topic.filter(temat => czyZrealizowano(temat) == false));
+      dzial.topic.filter(temat => czyZrealizowano(temat) == false).map(temat => {
         let option = document.createElement('option');
-        if (czyZrealizowano(temat)) option.setAttribute('disabled', 'disabled');
         option.value = temat;
         option.innerText = temat;
         tematSelect.appendChild(option);
-      });
+      })
+      dzial.topic.filter(czyZrealizowano).map(tematZrealizowany => {
+        let option = document.createElement('option');
+        option.setAttribute('disabled', 'disabled');
+        option.value = tematZrealizowany;
+        option.innerText = tematZrealizowany;
+        tematSelect.appendChild(option);
+      })
   }
   dzialSelect.addEventListener('change', wybierzTemat);
 
