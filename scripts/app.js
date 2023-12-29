@@ -34,9 +34,9 @@ for (let i = 0; i < localStorage.length; i++)
     );
   }
 
-// wyświetlenie ostatnio wybranej części
-(function app() {
-  switch (sessionStorage.getItem("strona")) {
+// wyświetlanie odpowiedniej części aplikacji w zależności od adresu url
+function app() {
+  switch (window.location.href.split('/')[window.location.href.split('/').length - 1]) {
     case "dziennik":
       metryczka.classList.add("hidden");
       dziennik.classList.remove("hidden");
@@ -48,12 +48,23 @@ for (let i = 0; i < localStorage.length; i++)
       podsumowanie.classList.remove("hidden");
       break;
     default:
+      if (
+        window.location.href.split('/')[window.location.href.split('/').length - 1] == 'index.html' ||
+        window.location.href.split('/')[window.location.href.split('/').length - 1] == ''
+        )
+        history.replaceState("", "", '/#/metryczka');
       metryczka.classList.remove("hidden");
       metryczkaShow();
       dziennik.classList.add("hidden");
       podsumowanie.classList.add("hidden");
       break;
   }
+}
+(function () {
+  app();
+
+  // obsługa przycisków nawigacji
+  window.addEventListener("popstate", () => app());
 })();
 
 // wyświetlenie odpowiedniej wersji części 'metryczka', w zależności od występowania zapisanych danych

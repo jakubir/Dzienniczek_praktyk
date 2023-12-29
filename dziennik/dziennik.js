@@ -36,13 +36,13 @@
         element.classList.add('list__element');
 
         let span = document.createElement('span');
-        span.appendChild(new Text(temat[0] + ' '));
+        span.appendChild(new Text(temat[0]));
         if (czyZrealizowano(temat[0]))
           span.classList.add('wyroznienie--przekreslenie');
         element.appendChild(span);
 
         span = document.createElement('span');
-        span.appendChild(new Text(temat[1] + ' godz.'));
+        span.appendChild(new Text(` ${temat[1]} godz.`));
         if (temat[1] > 0) span.classList.add('wyroznienie--zielone');
         else span.classList.add('wyroznienie--czerwone');
         span.classList.add('wyroznienie--pogrubienie');

@@ -10,7 +10,7 @@
     dziennik.classList.add('hidden');
     podsumowanie.classList.add('hidden');
 
-    sessionStorage.setItem('strona', 'metryczka');
+    history.pushState(null, null, '/#/metryczka');
   });
   
   dziennikME.addEventListener('click', () => {
@@ -22,7 +22,7 @@
     dziennik.classList.remove('hidden');
     podsumowanie.classList.add('hidden');
 
-    sessionStorage.setItem('strona', 'dziennik');
+    history.pushState(null, null, '/#/dziennik');
   });
   
   podsumowanieME.addEventListener('click', () => {
@@ -32,6 +32,6 @@
     godzinyShow();
     ocenaShow();
     
-    sessionStorage.setItem('strona', 'podsumowanie');
+    history.pushState(null, null, '/#/podsumowanie');
   });
 })();
